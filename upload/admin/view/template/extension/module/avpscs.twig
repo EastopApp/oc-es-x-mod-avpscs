@@ -1,0 +1,128 @@
+{{ header }}{{ column_left }}
+<!--
+/*
+ * OpenCart Color/Size Attributes Variant Product Switcher extension.
+ *
+ * Copyright (c) 2021 Alex AU <alex.au@live.com>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * 
+ */
+-->
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-attribute-group-color">{{ entry_attribute_group_color }}</label>
+            <div class="col-sm-10">
+              <select name="module_avpscs_agcolor" id="input-attribute-group-color" class="form-control">
+                <option value="0"></option>
+                {% for attribute_group in attribute_groups %}
+                {% if attribute_group.attribute_group_id == module_avpscs_agcolor %}
+                <option value="{{ attribute_group.attribute_group_id }}" selected="selected">{{ attribute_group.name }}</option>
+                {% else %}
+                <option value="{{ attribute_group.attribute_group_id }}">{{ attribute_group.name }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+              {% if error_attribute_group_color %}
+              <div class="text-danger">{{ error_attribute_group_color }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-attribute-group-size">{{ entry_attribute_group_size }}</label>
+            <div class="col-sm-10">
+              <select name="module_avpscs_agsize" id="input-attribute-group-size" class="form-control">
+                <option value="0"></option>
+                {% for attribute_group in attribute_groups %}
+                {% if attribute_group.attribute_group_id == module_avpscs_agsize %}
+                <option value="{{ attribute_group.attribute_group_id }}" selected="selected">{{ attribute_group.name }}</option>
+                {% else %}
+                <option value="{{ attribute_group.attribute_group_id }}">{{ attribute_group.name }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+              {% if error_attribute_group_size %}
+              <div class="text-danger">{{ error_attribute_group_size }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="module_avpscs_status" id="input-status" class="form-control">
+                {% if module_avpscs_status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-log">{{ entry_log }}</label>
+            <div class="col-sm-10">
+              <select name="module_avpscs_log" id="input-log" class="form-control">
+                {% if module_avpscs_log %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}
