@@ -98,11 +98,11 @@ class ControllerExtensionModuleAvpscs extends Controller {
             }
             $variants = array();
             foreach ($query->rows as $row) {
-              if ($row['attribute_group_id'] === $data['avpscs_attribute_group_color']) {
+              if ($row['attribute_group_id'] === (int)$data['avpscs_attribute_group_color']) {
                 $variants[$row['product_id']]['id'] = $row['product_id'];
                 $variants[$row['product_id']]['color'] = $row['attribute_name'];
               }
-              if ($row['attribute_group_id'] === $data['avpscs_attribute_group_size']) {
+              if ($row['attribute_group_id'] === (int)$data['avpscs_attribute_group_size']) {
                 $variants[$row['product_id']]['id'] = $row['product_id'];
                 $variants[$row['product_id']]['size'] = $row['attribute_name'];
               }
